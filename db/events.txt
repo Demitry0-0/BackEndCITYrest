@@ -1,0 +1,31 @@
++id
++название
++место
++дата начала
++организатор (userid)
++количество участников
++ограничение по количеству участников
++участники (массив у мероприятия с участниками)
++возраст от до
++цена
++продолжительность
++жанр
+
+Column('id', Integer, primary_key=True, unique=True, index=True),
+                              Column('title', String(128), nullable=False),
+                              Column('geoX', REAL, nullable=False),
+                              Column('geoY', REAL, nullable=False),
+                              Column('start', DATETIME, nullable=False),
+                              Column('organizerid', Integer, ForeignKey(self.__users.c.id),
+                                     nullable=False),
+                              Column('countMembers', Integer, nullable=False, default=0),
+                              Column('maxCountMembers', Integer, nullable=False, default=0),
+                              # 0 - inf
+                              Column('members', TEXT, nullable=False, default=json.dumps([])),
+                              Column('ageFrom', Integer, nullable=False, default=0),
+                              Column('ageTo', Integer, nullable=False, default=127),
+                              Column('price', Integer, nullable=False, default=0),
+                              Column('duration', Integer, nullable=False),
+                              Column('genre', TEXT, nullable=False, default=''),
+                              Column('photo', BLOB(), nullable=False,
+                                     default=self.convert_photo(self.__defaultphoto))
